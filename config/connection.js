@@ -1,7 +1,7 @@
 const development = {
   database: 'database_name',
-  username: 'username',
-  password: 'password',
+  username: 'postgres',
+  password: 'Postgres@2019',
   host: 'localhost',
   dialect: 'postgres'
 }
@@ -13,6 +13,7 @@ const test = {
   host: 'localhost',
   dialect: 'postgres'
 }
+
 const production = {
   database: process.env.DB_NAME,
   username: process.env.DB_USER,

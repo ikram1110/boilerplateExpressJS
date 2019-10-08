@@ -6,7 +6,7 @@
 
 const app = require("../app/app");
 const http = require("http");
-//const dbService = require("../app/services/db.service");
+const dbService = require("../app/services/db.service");
 
 /**
  * Get port from environment and store in Express.
@@ -14,7 +14,7 @@ const http = require("http");
 
 const PORT = normalizePort(process.env.PORT || "9000");
 const ENV = process.env.NODE_ENV || "development";
-//const DB = dbService(ENV, false).start();
+const DB = dbService(ENV, false).start();
 
 app.set('port', PORT);
 app.set('env', ENV);
@@ -88,5 +88,5 @@ function onError(error) {
 
 function onListening() {
   console.log('Express http-server listening on port %d in %s mode', app.get('port'), app.get('env'));
-  //return DB;
+  return DB;
 }

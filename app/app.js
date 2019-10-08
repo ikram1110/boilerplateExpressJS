@@ -7,9 +7,10 @@ const app = express()
 app.use(cors())
 
 //set route
+const masterRoute = require('../routes/master')
 
 //fill routes
-
+app.use('/master', masterRoute)
 
 //parse incoming requests data
 app.use(bodyParser.json())
