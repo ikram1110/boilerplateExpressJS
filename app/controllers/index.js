@@ -1,7 +1,9 @@
 const memberController = require('./MemberController')
+const documentationController = require('./DocumentationController')
 
 const controllers = {
-  memberController
+  memberController,
+  documentationController
 }
 
 module.exports = controllers

@@ -9,12 +9,12 @@ app.use(cors())
 //set route
 const masterRoute = require('../routes/master')
 
-//fill routes
-app.use('/master', masterRoute)
-
 //parse incoming requests data
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+
+//fill routes
+app.use('/master', masterRoute)
 
 //set up a default catch-all route
 app.get('/', (req, res) => res.status(200).send({
