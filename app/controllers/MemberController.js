@@ -65,11 +65,11 @@ class MemberController {
     }
 
     if (!dtMember) {
-      status = '404'
+      status = 404
       message = 'Data member tidak ditemukan'
     }
     else {
-      status = '200'
+      status = 200
       message = 'sukses'
     }
 
