@@ -25,7 +25,7 @@ class AuthController {
         token = null
       }
       else {
-        token = authService().issue({id: username, type: 'member'})
+        token = await authService().issue({id: username, type: 'member'})
         token = `Bearer ${token}`
         status = 200
         message = 'Login berhasil'
@@ -58,7 +58,44 @@ class AuthController {
   }
 
   async validate(req, res) {
-    
+    req.start = Date.now()
+    let data
+    let status
+    let message
+    let response
+    const token = req.header('Authorization').split('Bearer ')[1]
+
+    let time = Date.now() - req.start
+    const used = process.memoryUsage().heapUsed / 1024 / 1024
+    authService().verify(token, (error, result) => {
+      if (error) {
+        status = 401
+        message = error.message
+        response = {
+          isvalid: false
+        }
+      }
+      else {
+        status = 200
+        message = 'validasi sukses'
+        response = {
+          isvalid: true,
+          type: result.type
+        }
+      }
+
+      data = {
+        diagnostic: {
+          status: status,
+          message: message,
+          memoryUsage : `${Math.round(used * 100) / 100} MB`,
+          elapsedTime : time,
+          timestamp : Date(Date.now()).toString(),
+        },
+        result: response
+      }
+      return res.status(status).json(data)
+    })
   }
 
   async logout(req, res) {
